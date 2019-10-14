@@ -1,7 +1,7 @@
 const express = require('express');
 const helmet = require('helmet');
 const cors = require('cors');
-
+const bycryptjs = require('bcrypyjs')
 const db = require('./database/dbConfig.js');
 const Users = require('./users/users-model.js');
 
@@ -43,6 +43,16 @@ server.post('/api/login', (req, res) => {
       res.status(500).json(error);
     });
 });
+
+
+server.get('/hash', (req, res) => {
+  // read a password from the Authoriza
+  var salt = bcrypt.genSaltSync(10);
+var hash = bcrypt.hashSync("B4c0/\/", salt);
+  
+    // return an object with the password hashed using bcryptjs
+  // { hash: '970(&(:OHKJHIY*HJKH(*^)*&YLKJBLKJGHIUGH(*P' }
+ 
 
 server.get('/api/users', (req, res) => {
   Users.find()
